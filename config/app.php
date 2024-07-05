@@ -165,7 +165,13 @@ return [
      * - `log` - boolean - Whether or not you want exceptions logged.
      * - `exceptionRenderer` - string - The class responsible for rendering uncaught exceptions.
      *   The chosen class will be used for for both CLI and web environments. If you want different
-     *   classes used in CLI and web environments you'll need to write that conditional logic as well.
+     *   classes used in CLI and web e'bigquery' => [
+            'className' => 'App\Database\BigQuery\Connection',
+            'driver' => 'App\Database\BigQuery\Driver\BigQuery',
+            'projectId' => env('GOOGLE_PROJECT_ID', null),
+            'keyFilePath' => ROOT . '/' . env('GOOGLE_CREDENTIALS_PATH', null),
+            'dataSet' => env('BIGQUERY_DATASET', null),
+        ],nvironments you'll need to write that conditional logic as well.
      *   The conventional location for custom renderers is in `src/Error`. Your exception renderer needs to
      *   implement the `render()` method and return either a string or Http\Response.
      *   `errorRenderer` - string - The class responsible for rendering PHP errors. The selected
@@ -330,6 +336,14 @@ return [
              * which is the recommended value in production environments
              */
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
+        ],
+        
+        'bigquery' => [
+            'className' => 'Chinh\BigQuery\BigQueryConnection',
+            'driver' => 'Chinh\BigQuery\BigQueryDriver',
+            'projectId' => env('GOOGLE_PROJECT_ID', null),
+            'keyFilePath' => env('GOOGLE_CREDENTIALS_PATH', null),
+            'dataSet' => env('BIGQUERY_DATASET', null),
         ],
 
         /*
